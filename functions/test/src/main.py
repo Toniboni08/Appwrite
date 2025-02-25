@@ -77,12 +77,14 @@ def main(context):
                 except KeyError:
                     return throwError(context, "UUIDNotFoundError", "the uuid %s could not be found in minecraft" % playerUUID)
 
-                document = databases.list_documents("67bdd976002814a9f0bf",
+                documents = databases.list_documents("67bdd976002814a9f0bf",
                     "67bddec4001367f18b1b",
                     [Query.equal("uuid", playerUUID), Query.equal("serverId", serverId), Query.limit(1)]
-                )["documents"][0]
+                )
 
-                if document["total"] == 0:
+                document = documents["documents"][0]
+
+                if documents["total"] == 0:
                     return throwError(context, "NoChallengeFound", f"The challenge with the serverId {serverId} and the uuid {playerUUID} could not be found!")
 
                 response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}8&serverId={serverId}")
