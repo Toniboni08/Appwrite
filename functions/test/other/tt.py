@@ -5,3 +5,4 @@ client = Client().set_key("standard_ff7ea6d93718221f676d06876346da516ce120648edc
 
 users = Users(client)
 
+print(users.list())
