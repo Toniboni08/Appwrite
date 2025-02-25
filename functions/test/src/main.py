@@ -1,4 +1,5 @@
 import hashlib
+import json
 import uuid
 from json import JSONDecodeError
 
@@ -38,7 +39,7 @@ def main(context):
     if context.req.method == "GET":
         if context.req.path == "/get_challenge":
             try:
-                request = context.req.json()
+                request = json.loads(context.req.json_body)
                 playerUUID = request["uuid"]
 
             except JSONDecodeError as error:
@@ -67,7 +68,7 @@ def main(context):
             )
         if context.req.path == "/authenticate":
             try:
-                request = context.req.json()
+                request = json.loads(context.req.json_body)
                 playerUUID = request["uuid"]
                 serverId = request["serverId"]
 
@@ -106,8 +107,6 @@ def main(context):
 
             except JSONDecodeError as error:
                 return jsonError(context, error)
-            except AttributeError:
-                return throwError(context, "JSONDecodeError", "The Json could not be decoded!")
             except KeyError as error:
                 return keyError(context, error)
 
