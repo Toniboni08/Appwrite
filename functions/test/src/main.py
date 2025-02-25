@@ -89,7 +89,7 @@ def main(context):
 
                 response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}&serverId={serverId}")
                 if response.status_code == 200:
-                    userQuery = users.list(Query.equal("name", playerUUID))
+                    userQuery = users.list([Query.equal("name", playerUUID)])
 
                     if userQuery["total"] == 0:
                         user = users.create(ID.unique(), name=playerUUID)
