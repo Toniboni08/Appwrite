@@ -105,7 +105,7 @@ def main(context):
                         }
                     )
 
-                context.log("Mojang reported with code %s" % response.status_code)
+                context.log(f'Mojang reported with code {response.status_code} after sending "https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}&serverId={serverId}"')
 
                 return throwError(context, "NotAuthenticatedError", "The client did not authenticate with mojangs servers!")
 
