@@ -100,7 +100,7 @@ def main(context):
                     return context.res.json(
                         {
                             "success": True,
-                            "token": users.create_token(user["$id"], 16),
+                            "token": users.create_token(user["$id"], 32)["secret"],
                             "clientId": user["$id"]
                         }
                     )
