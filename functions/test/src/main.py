@@ -106,6 +106,8 @@ def main(context):
 
             except JSONDecodeError as error:
                 return jsonError(context, error)
+            except AttributeError:
+                return throwError(context, "JSONDecodeError", "The Json could not be decoded!")
             except KeyError as error:
                 return keyError(context, error)
 
