@@ -39,7 +39,7 @@ def main(context):
     if context.req.method == "GET":
         if context.req.path == "/get_challenge":
             try:
-                request = json.loads(context.req.json_body)
+                request = json.loads(context.req.body_json)
                 playerUUID = request["uuid"]
 
             except JSONDecodeError as error:
@@ -68,7 +68,7 @@ def main(context):
             )
         if context.req.path == "/authenticate":
             try:
-                request = json.loads(context.req.json_body)
+                request = json.loads(context.req.body_json)
                 playerUUID = request["uuid"]
                 serverId = request["serverId"]
 
