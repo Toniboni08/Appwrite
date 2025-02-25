@@ -80,7 +80,7 @@ def main(context):
                 document = databases.list_documents("67bdd976002814a9f0bf",
                     "67bddec4001367f18b1b",
                     [Query.equal("uuid", playerUUID), Query.equal("serverId", serverId), Query.limit(1)]
-                )["document"][0]["data"]
+                )["documents"][0]["data"]
 
                 if document["total"] == 0:
                     return throwError(context, "NoChallengeFound", f"The challenge with the serverId {serverId} and the uuid {playerUUID} could not be found!")
