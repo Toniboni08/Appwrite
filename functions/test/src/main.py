@@ -11,3 +11,5 @@ def main(context):
 
     if context.req.method == "GET":
         context.log(context.req.body_text)
+
+    return context.res.empty()
