@@ -73,7 +73,7 @@ def main(context):
                 serverId = request["serverId"]
 
                 try:
-                    playerName = requests.get(f"https://api.minecraftservices.com/minecraft/profile/lookup/{playerUUID}").json()["id"]
+                    playerName = requests.get(f"https://api.minecraftservices.com/minecraft/profile/lookup/{playerUUID}").json()["name"]
                 except KeyError:
                     return throwError(context, "UUIDNotFoundError", "the uuid %s could not be found in minecraft" % playerUUID)
 
