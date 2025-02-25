@@ -82,25 +82,26 @@ def main(context):
                     [Query.equal("uuid", playerUUID), Query.equal("serverId", serverId), Query.limit(1)]
                 )
 
-                document = documents["documents"][0]
-
                 if documents["total"] == 0:
                     return throwError(context, "NoChallengeFound", f"The challenge with the serverId {serverId} and the uuid {playerUUID} could not be found!")
+
+                databases.delete_document("67bdd976002814a9f0bf", "67bddec4001367f18b1b", documents["documents"][0]["id"])
 
                 response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}&serverId={serverId}")
                 if response.status_code == 200:
                     userQuery = users.list(Query.equal("name", playerUUID))
 
                     if userQuery["total"] == 0:
-                        userId = users.create(ID.unique(), name=playerUUID)
+                        user = users.create(ID.unique(), name=playerUUID)
                     else:
-                        userId = userQuery["users"][0]
+                        user = userQuery["users"][0]
 
 
                     return context.res.json(
                         {
                             "success": True,
-                            "token": users.create_token(userId, 16)
+                            "token": users.create_token(user, 16),
+                            "clientId": user["id"]
                         }
                     )
 
