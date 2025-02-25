@@ -10,4 +10,4 @@ def main(context):
     )
 
     if context.req.method == "GET":
-        context.log(context.req.bodyJson)
+        context.log(context.req.body_json)
