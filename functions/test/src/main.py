@@ -16,13 +16,13 @@ def throwError(context, errorType, message):
     return context.res.json(
         {
             "success": False,
-            "errorType": "JsonDecodeError",
+            "errorType": errorType,
             "message": message
         }
     )
 
 def keyError(context, errorObject):
-    return throwError(context, "KeyError", "Field %s could not be found in the request" % errorObject.args[0])
+    return throwError(context, "KeyError", 'Field "%s" could not be found in the request' % errorObject.args[0])
 
 def jsonError(context, errorObject):
     return throwError(context, "JsonDecodeError", errorObject.msg)
@@ -85,7 +85,7 @@ def main(context):
                 if document["total"] == 0:
                     return throwError(context, "NoChallengeFound", f"The challenge with the serverId {serverId} and the uuid {playerUUID} could not be found!")
 
-                response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username=Toniboni8&serverId={serverId}")
+                response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}8&serverId={serverId}")
                 if response.status_code == 200:
                     userQuery = users.list(Query.equal("name", playerUUID))
 
