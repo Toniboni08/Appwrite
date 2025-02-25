@@ -104,6 +104,8 @@ def main(context):
                         }
                     )
 
+                context.log("Mojang reported with code %s" % response.status_code)
+
                 return throwError(context, "NotAuthenticatedError", "The client did not authenticate with mojangs servers!")
 
 
