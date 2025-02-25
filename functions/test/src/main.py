@@ -87,7 +87,7 @@ def main(context):
                 if documents["total"] == 0:
                     return throwError(context, "NoChallengeFound", f"The challenge with the serverId {serverId} and the uuid {playerUUID} could not be found!")
 
-                response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}8&serverId={serverId}")
+                response = requests.get(f"https://sessionserver.mojang.com/session/minecraft/hasJoined?username={playerName}&serverId={serverId}")
                 if response.status_code == 200:
                     userQuery = users.list(Query.equal("name", playerUUID))
 
